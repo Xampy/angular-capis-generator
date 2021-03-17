@@ -5,29 +5,12 @@
     },
     "resources": [
         {
-            "name": "securite",
-            "paths": [
-                {
-                    "method": "post",
-                    "name": "default",
-                    "path": "/login"
-                }
-            ]
-        },
-
-        {
             "name": "personne",
             "paths": [
                 {
-                    "method": "post",
-                    "name": "default",
-                    "path": "/physique"
-                },
-
-                {
                     "method": "get",
                     "name": "default",
-                    "path": "/physique/meuble/{id}"
+                    "path": "/physique/collections/{collection_id}/meuble/{id}/prix"
                 }
             ]
         }

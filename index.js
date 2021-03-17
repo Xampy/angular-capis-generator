@@ -1,6 +1,7 @@
 'use strict';
 
-const parser_path =  require('./src/parser/path');
+const parser_path = require('./src/parser/path');
+const generator   = require('./src/generator/name');
 
 const fs = require('fs');
 //fs.open()
@@ -32,9 +33,14 @@ function handleResource(resource) {
 
     resource.paths.forEach((path, index) => {
         console.log(path);
-        let result =  parser_path.parseArguments(path.path);
 
-        console.log(result);
+        let method = path.method;
+        let result =  parser_path.parseArguments(path.path);
+        console.log("Parse url arguments\n", result);
+
+        generator.generateFunctionName(method, result);
+
+        
     } );
 
 
