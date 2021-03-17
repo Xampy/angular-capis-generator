@@ -1,0 +1,35 @@
+{
+    "config": {
+        "name": "",
+        "output_dir": "default"
+    },
+    "resources": [
+        {
+            "name": "securite",
+            "paths": [
+                {
+                    "method": "post",
+                    "name": "default",
+                    "path": "/login"
+                }
+            ]
+        },
+
+        {
+            "name": "personne",
+            "paths": [
+                {
+                    "method": "post",
+                    "name": "default",
+                    "path": "/physique"
+                },
+
+                {
+                    "method": "get",
+                    "name": "default",
+                    "path": "/physique/meuble/{id}"
+                }
+            ]
+        }
+    ]
+}
