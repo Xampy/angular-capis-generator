@@ -1,6 +1,6 @@
 "use strict"
 
-const utils = require('../utils');
+const packageUtils = require('../utils');
 const strings_camel_case = require('../strings/camel_case');
 
 
@@ -59,35 +59,44 @@ function generateFunctionName(method, path_arguments){
 
 
     let name = "";
+
     for (var i = path_arguments.path.length - 1; i >= 0; i--) {
         //Check if there is an argument associedted for this
         //endpoint
-        let found_argument = path_arguments.arguments.find( (element, index) => {
+
+        console.log("Working path ", path_arguments.path[i]);
+        let found_arguments = path_arguments.arguments.filter( (element, index) => {
             if ( element.endpoint === path_arguments.path[i]) {
-                return element;
+                return true;
             }
         });
 
 
-        name += utils.toTitle(path_arguments.path[i]);
-        if(found_argument === undefined){
+        name += packageUtils.toTitle(path_arguments.path[i]);
 
+        if(found_arguments === undefined){
+            //Need to add the argument in the name of the function
+            //handled [False]
         }else {
-            name += "By";
-            name += utils.toTitle(strings_camel_case.stringToCamelCase(found_argument.argument));
 
+            found_arguments.forEach(
+                (arg, arg_index) => {
+                    name += "By";
+                    name += packageUtils.toTitle(strings_camel_case.stringToCamelCase(arg.argument));
+                }
+            );
+
+            
         }
-
         name += "On";
 
-
         console.log("Check if we hace an endpoint with the name giben in path");
-        console.log(found_argument === undefined);
-        console.log( utils.toTitle(path_arguments.path[i]) );
+        console.log(found_arguments === undefined);
+        console.log( packageUtils.toTitle(path_arguments.path[i]) );
     }
 
     name = name.substr(0, name.length - 2);
-    name = method.toLowerCase() + name;
+    name = start + name;
     console.log("function name => ",  name);
 
 

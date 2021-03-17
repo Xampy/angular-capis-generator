@@ -10,7 +10,7 @@
                 {
                     "method": "get",
                     "name": "default",
-                    "path": "/physique/collections/{collection_id}/meuble/{id}/prix"
+                    "path": "/physique/collections/{collection_id}.{collection_type}/meuble/{type}/{prix_max}/prix/{format}"
                 }
             ]
         }

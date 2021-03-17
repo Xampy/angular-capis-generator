@@ -25,9 +25,7 @@ function parseArguments(path) {
     //handled [OK]
 
 
-    components = components.filter( function(element){ return element !== '' } );
-    components.map( function(item, index){
-        //Check for braces
+    function processArgument(item, index){
         if ( item.startsWith("{") && item.endsWith("}")  ) {
             //Remove it from path components
 
@@ -38,18 +36,45 @@ function parseArguments(path) {
             }
             //console.log( p );
 
-            let pathEndPoint = components[index - 1];
+            let subs = 1
+            let pathEndPoint = components[index - subs];
+            while( pathEndPoint.includes("{") && pathEndPoint.includes("}") ){
+                console.log("searching path ", pathEndPoint);
+                subs += 1;
+                pathEndPoint = components[index - subs];
+                console.log("searching path ", pathEndPoint);
+            }
+            console.log("pathEndPoint ", pathEndPoint);
+            if (pathEndPoint === undefined) {
+                //We have a slash before our argument
+                pathEndPoint = "/";
+            }
             let data = {
                 endpoint: pathEndPoint,
                 argument: p,
             }
-
-            
-
             result.arguments = [...result.arguments, data];
-
-            
         }
+    }
+
+
+    components = components.filter( function(element){ return element !== '' } );
+    components.map( function(item, index){
+        //Path allows . to be in the path string
+        //Symfony uses it much
+        console.log(components);
+        console.log(item);
+        if( item.includes("{") && item.includes("}") && item.includes(".") ){
+            let path_arguments = item.split('.');
+            path_arguments.forEach(
+                (path_argument, pa_index) => {
+                    processArgument(path_argument, index);
+                }
+            );
+        }else if ( item.includes("{") && item.includes("}") )  {
+            processArgument(item, index)
+        }
+        
     });
 
     //Filter the components array from the arguments

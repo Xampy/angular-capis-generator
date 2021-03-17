@@ -15,6 +15,7 @@
   "author": "Xampy",
   "license": "ISC",
   "dependencies": {
-    "fs": "0.0.1-security"
+    "fs": "0.0.1-security",
+    "utils": "^0.3.1"
   }
 }

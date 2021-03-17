@@ -20,6 +20,8 @@ fs.readFile("input_template.json", (err, data) => {
     //handle resource here
     console.log("\n\nRessources\n")
     json.resources.forEach(element => {
+
+        console.log("\n\n\n\n\n");
         handleResource(element);
     });
 });
