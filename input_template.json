@@ -10,7 +10,31 @@
                 {
                     "method": "get",
                     "name": "default",
-                    "path": "/physique/collections/{collection_id}.{collection_type}/meuble/{type}/{prix_max}/prix/{format}"
+                    "path": "/type/{format}"
+                },
+
+                {
+                    "method": "post",
+                    "name": "default",
+                    "path": "/type/{format}"
+                },
+
+                {
+                    "method": "patch",
+                    "name": "default",
+                    "path": "/type/{format}"
+                },
+
+                {
+                    "method": "put",
+                    "name": "default",
+                    "path": "/type/{format}"
+                },
+
+                {
+                    "method": "delete",
+                    "name": "default",
+                    "path": "/type/{format}"
                 }
             ]
         }

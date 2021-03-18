@@ -12,21 +12,21 @@ const httpVerb = require("./verb.template");
  * 
  * @returns {string}
  */
- function formatPatchTemplate(name, urlParams, path){
-    return httpVerb.formatTemplate(name, urlParams, path, PATCH_TEMPLATE_FORMAT);
+ function formatPutTemplate(name, urlParams, path){
+    return httpVerb.formatTemplate(name, urlParams, path, PUT_TEMPLATE_FORMAT);
 
 }
 
 
-const PATCH_TEMPLATE_FORMAT = `
+const PUT_TEMPLATE_FORMAT = `
 %s(${httpVerb.FUNCTIONS_PARAMS_PATTERN}){
     let url = this.RESOURCE_BASE_PATH + \`/%s\`;
 
-    //Define a type fot the patch data
+    //Define a type fot the update data
     //will be more preventive
     //let body = JSON.stringify(data);
 
-    return this.httpClient.patch(
+    return this.httpClient.update(
         url,
         body, {
             headers: this.requestHeaders
@@ -38,5 +38,5 @@ const PATCH_TEMPLATE_FORMAT = `
 `
 
 
-module.exports.PATCH_TEMPLATE_FORMAT = PATCH_TEMPLATE_FORMAT;
-module.exports.formatTemplate = formatPatchTemplate;
+module.exports.PUT_TEMPLATE_FORMAT = PUT_TEMPLATE_FORMAT;
+module.exports.formatTemplate = formatPutTemplate;

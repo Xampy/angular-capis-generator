@@ -16,7 +16,7 @@ function stringToCamelCase(data) {
     		if(i != data.length - 1) {
     			result += ( data[i+1].toUpperCase() );
     			toReplace = true;
-    			console.log( "result", result);
+    			//console.log( "result", result);
     		}
     	}else {
     		//check for
@@ -27,7 +27,7 @@ function stringToCamelCase(data) {
     		}
     	}
     }
-    console.log("Convet to camel case ", result);
+    //console.log("Convet to camel case ", result);
 
     return result;
 }
@@ -47,7 +47,7 @@ function isCamelCase(chain) {
 
 /*let test = ["col_row", "col-row", "col row"];
 test.forEach((element, index) => {
-	console.log( stringToCamelCase(element) );
+	//console.log( stringToCamelCase(element) );
 });
 */
 

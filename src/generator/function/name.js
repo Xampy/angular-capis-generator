@@ -1,7 +1,7 @@
 "use strict"
 
-const packageUtils = require('../utils');
-const strings_camel_case = require('../strings/camel_case');
+const packageUtils = require('../../utils');
+const strings_camel_case = require('../../utils/strings/camel_case');
 
 
 /**
@@ -25,7 +25,7 @@ const strings_camel_case = require('../strings/camel_case');
  * }
  * 
  * let name = generateName(method, path, arguments)
- * console.log(name) // getABById(id: any)
+ * //console.log(name) // getABById(id: any)
  */
 function generateFunctionName(method, path_arguments){
     let start = "";
@@ -54,8 +54,8 @@ function generateFunctionName(method, path_arguments){
             break;
     }
 
-    console.log(method);
-    console.log( path_arguments );
+    //console.log(method);
+    //console.log( path_arguments );
 
 
     let name = "";
@@ -64,7 +64,7 @@ function generateFunctionName(method, path_arguments){
         //Check if there is an argument associedted for this
         //endpoint
 
-        console.log("Working path ", path_arguments.path[i]);
+        //console.log("Working path ", path_arguments.path[i]);
         let found_arguments = path_arguments.arguments.filter( (element, index) => {
             if ( element.endpoint === path_arguments.path[i]) {
                 return true;
@@ -72,7 +72,7 @@ function generateFunctionName(method, path_arguments){
         });
 
 
-        name += packageUtils.toTitle(path_arguments.path[i]);
+        name += strings_camel_case.stringToCamelCase( packageUtils.toTitle(path_arguments.path[i]) );
 
         if(found_arguments === undefined){
             //Need to add the argument in the name of the function
@@ -90,14 +90,14 @@ function generateFunctionName(method, path_arguments){
         }
         name += "On";
 
-        console.log("Check if we hace an endpoint with the name giben in path");
-        console.log(found_arguments === undefined);
-        console.log( packageUtils.toTitle(path_arguments.path[i]) );
+        //console.log("Check if we hace an endpoint with the name giben in path");
+        //console.log(found_arguments === undefined);
+        //console.log( packageUtils.toTitle(path_arguments.path[i]) );
     }
 
     name = name.substr(0, name.length - 2);
     name = start + name;
-    console.log("function name => ",  name);
+    //console.log("function name => ",  name);
 
 
     return name;

@@ -66,9 +66,9 @@ export abstract class AbstractAPIRequest {
 	protected handleError(error: HttpErrorResponse){
 		if (error.error instanceof ErrorEvent) {
 			//Client side error
-			console.error('An error occurred:', error.error.message);
+			//console.error('An error occurred:', error.error.message);
 		  } else {
-				console.error(
+				//console.error(
 				 ` + `Backend returned code ${error.status}, ` +
 				`body was: ${error.error}` + `);
 		  }

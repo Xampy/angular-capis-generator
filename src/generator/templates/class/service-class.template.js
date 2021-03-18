@@ -7,13 +7,10 @@ import { Injectable } from '@angular/core';
 import { catchError } from 'rxjs/operators';
 
 
-
-
-
 /**
  * API Personne
  * 
- * Gestion des personnes physiques comme Morales
+ * Gestion des personnes physiques comme Morales //To be replaced by
  * 
  * 
  * + createPersonnePhysque(data: any)
@@ -31,7 +28,7 @@ import { catchError } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
-export class PersonneApiService extends  AbstractTokenizedAPIRequest{
+export class PersonneApiService extends  AbstractAPIRequest{
   
     constructor(
         private httpClient: HttpClient

@@ -1,4 +1,4 @@
-"use strict"
+"use strict";
 
 const camel = require("../utils/strings/camel_case");
 
@@ -20,7 +20,7 @@ function parseArguments(path) {
     let result = {arguments: [], path: []};
 
     let components = path.split(limiter, -1);
-
+    console.log(components);
 
     //Need to handle double parmaters value
     //exemple /a/id/b/id
@@ -36,17 +36,17 @@ function parseArguments(path) {
             if ( p.includes("{") || p.includes("}") ) {
                 throw Error(`Parsing Error : path argument contains a brace -${item}`)
             }
-            //console.log( p );
+            ////console.log( p );
 
             let subs = 1
             let pathEndPoint = components[index - subs];
             while( pathEndPoint.includes("{") && pathEndPoint.includes("}") ){
-                console.log("searching path ", pathEndPoint);
+                //console.log("searching path ", pathEndPoint);
                 subs += 1;
                 pathEndPoint = components[index - subs];
-                console.log("searching path ", pathEndPoint);
+                //console.log("searching path ", pathEndPoint);
             }
-            console.log("pathEndPoint ", pathEndPoint);
+            //console.log("pathEndPoint ", pathEndPoint);
             if (pathEndPoint === undefined) {
                 //We have a slash before our argument
                 pathEndPoint = "/";
@@ -64,8 +64,8 @@ function parseArguments(path) {
     components.map( function(item, index){
         //Path allows . to be in the path string
         //Symfony uses it much
-        console.log(components);
-        console.log(item);
+        //console.log(components);
+        //console.log(item);
         if( item.includes("{") && item.includes("}") && item.includes(".") ){
             let path_arguments = item.split('.');
             path_arguments.forEach(
@@ -76,7 +76,6 @@ function parseArguments(path) {
         }else if ( item.includes("{") && item.includes("}") )  {
             processArgument(item, index)
         }
-        
     });
 
     //Filter the components array from the arguments
@@ -106,7 +105,7 @@ function parseArguments(path) {
  * 
  * @example 
  * let params = ['a', 'b'];
- * console.log( formatPathArgumentToFunction(params)); // "a: any, b: any"
+ * //console.log( formatPathArgumentToFunction(params)); // "a: any, b: any"
  */
  function formatPathArgumentToFunction(params){
     let result = "";
@@ -126,11 +125,28 @@ function parseArguments(path) {
  * transfor argument in the url to camel casse to match
  * the function which will use it argument
  * 
- * @param { Array<{ arguments: Array<{endpoint: string, argument: string }>, path: Array<string> }> } data 
+ * @param { { arguments: Array<{endpoint: string, argument: string }>, path: Array<string> } } data 
  * @returns {string}
  */
 function formatUrlForFunction(data){
+    let result = "";
+    data.path.forEach(path => {
+        result += ( path + "/" );
+        //Add arguments
+        let arguments_ = [];
+        arguments_ = data.arguments.filter(
+            (element, index) => {
+                return element.endpoint === path;
+            }
+        );
 
+        arguments_.forEach(
+            (item, arg_index) => {
+                result += ( `\$\{${camel.stringToCamelCase(item.argument)}\}/` ); //Remark the end slash                
+            }
+        );
+    });
+    return result;
 }
 
 
@@ -143,5 +159,6 @@ function formatUrlForFunction(data){
 
 
 
+module.exports.formatUrlForFunction = formatUrlForFunction;
 module.exports.parseArguments = parseArguments;
 module.exports.formatPathArgumentToFunction = formatPathArgumentToFunction;
