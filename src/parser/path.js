@@ -1,5 +1,7 @@
 "use strict"
 
+const camel = require("../utils/strings/camel_case");
+
 /**
  * Parse path argument
  *
@@ -91,4 +93,55 @@ function parseArguments(path) {
     return result;    
 }
 
+
+/**
+ * 
+ * Format an array of string params to
+ * to a string. A generated function function 
+ * will use it as list of paramter
+ * 
+ * 
+ * @param {Array<string>} params
+ * @returns {string}
+ * 
+ * @example 
+ * let params = ['a', 'b'];
+ * console.log( formatPathArgumentToFunction(params)); // "a: any, b: any"
+ */
+ function formatPathArgumentToFunction(params){
+    let result = "";
+    for (let index = 0; index < params.length; index++) {
+        const element = params[index];
+        result += (  camel.stringToCamelCase(element)    + ": any, ");
+        
+    };
+    return result.substr(0, result.length - 2); //Avoid the last space and the last comma
+}
+
+
+
+
+/**
+ * Format the url using the arguments
+ * transfor argument in the url to camel casse to match
+ * the function which will use it argument
+ * 
+ * @param { Array<{ arguments: Array<{endpoint: string, argument: string }>, path: Array<string> }> } data 
+ * @returns {string}
+ */
+function formatUrlForFunction(data){
+
+}
+
+
+
+
+
+
+
+
+
+
+
 module.exports.parseArguments = parseArguments;
+module.exports.formatPathArgumentToFunction = formatPathArgumentToFunction;

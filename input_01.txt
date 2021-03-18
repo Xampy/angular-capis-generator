@@ -7,9 +7,9 @@ output-dir src/services/api
 post /login
 
 #personne "Gestion des personnes physiques comme Morales"
-post /personne/physique
+post --json /personne/physique
 put  /personne/physique
-get  /personne/physique/all
+get  --name getAllPersonne --url  /personne/physique/all
 get  /personne/physique/id/{id}
 post /personne/morale
 put /personne/morale

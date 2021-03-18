@@ -1,6 +1,5 @@
 "use strict";
 
-
 /**
  * Convert a string to a titled string
  * 
@@ -16,6 +15,3 @@ function toTitle(title){
     return title[0].toUpperCase() + title.substr(1, title.length - 1);
 }
 
-
-
-module.exports.toTitle = toTitle;
