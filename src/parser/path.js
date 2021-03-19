@@ -20,7 +20,7 @@ function parseArguments(path) {
     let result = {arguments: [], path: []};
 
     let components = path.split(limiter, -1);
-    console.log(components);
+    //console.log(components);
 
     //Need to handle double parmaters value
     //exemple /a/id/b/id

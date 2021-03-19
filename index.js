@@ -19,36 +19,55 @@ fs.readFile("input_template.json", (err, data) => {
 
     //handle resource here
     //console.log("\n\nRessources\n")
-    json.resources.forEach(element => {
+    let resourceServicesDescription =  json.resources.map( (element, index) => {
+        return {
+            resource_name: element.name, 
+            methods: handleResource(element)
+        };
+    });
 
-        //console.log("\n\n\n\n\n");
+    resourceServicesDescription.forEach(resource => {
+        console.log(resource.resource_name);
+        console.log(resource.methods.length);
 
 
-        handleResource(element);
-
+        let service = generator.template.service.formatTemplate( 
+            resource.resource_name, 
+            "Gestion des personnes", 
+            resource.methods
+        );
+        
+        console.log(service);
 
     });
+    
+
+   
 });
 
 
-
+/**
+ * 
+ * @param {string} resource 
+ * @returns { Array< string > } generated function strings
+ */
 function handleResource(resource) {
     //console.log("Resource name : ", resource.name);
     //console.log("Resource paths : ", resource.paths);
     //console.log("\n");
 
-    resource.paths.forEach((path, index) => {
+    return resource.paths.map((path, index) => {
         //console.log(path);
 
         let method = path.method;
         let result =  parser_path.parseArguments(path.path);
-        console.log("Parse url arguments\n", result);
+        //console.log("Parse url arguments\n", result);
 
         let functionName = generator.function_name.generateFunctionName(method, result);
 
         let url = parser_path.formatUrlForFunction(result);
-        console.log(url);
-        console.log(functionName);
+        //console.log(url);
+        //console.log(functionName);
 
         //console.log("AZrguments list", arguments);
         let arguments_ = result.arguments.map(
@@ -60,7 +79,8 @@ function handleResource(resource) {
         let func = generator.template.http(method).formatTemplate(
             functionName, arguments_, parser_path.formatUrlForFunction(result) );
         
-            console.log(func);
+        //console.log(func);
+        return func;
 
         
     } );

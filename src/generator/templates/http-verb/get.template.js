@@ -1,6 +1,7 @@
 "use strict";
 
 const httpVerb = require("./verb.template");
+const { INDENT_TAB_SPACE } = require("../../../../config");
 
 /***
  * Format the template with values without a defined name
@@ -17,19 +18,18 @@ const httpVerb = require("./verb.template");
 }
 
 
-const GET_TEMPLATE_FORMAT = `
-%s(${httpVerb.FUNCTIONS_PARAMS_PATTERN}){
-    let url = this.RESOURCE_BASE_PATH + \`/%s\`;
+const GET_TEMPLATE_FORMAT = 
+`%s(${httpVerb.FUNCTIONS_PARAMS_PATTERN}){
+${INDENT_TAB_SPACE}${INDENT_TAB_SPACE}let url = this.RESOURCE_BASE_PATH + \`/%s\`;
 
-    //Add additional headers and options here
+${INDENT_TAB_SPACE}${INDENT_TAB_SPACE}//Add additional headers and options here
 
-    return this.httpClient.get(
-        url
-    ).pipe(
-        catchError(this.handleError)
-    );
-}
-`
+${INDENT_TAB_SPACE}${INDENT_TAB_SPACE}return this.httpClient.get(
+${INDENT_TAB_SPACE}${INDENT_TAB_SPACE}${INDENT_TAB_SPACE}url
+${INDENT_TAB_SPACE}${INDENT_TAB_SPACE}).pipe(
+${INDENT_TAB_SPACE}${INDENT_TAB_SPACE}${INDENT_TAB_SPACE}catchError(this.handleError)
+${INDENT_TAB_SPACE}${INDENT_TAB_SPACE});
+${INDENT_TAB_SPACE}}`
 
 
 module.exports.GET_TEMPLATE_FORMAT = GET_TEMPLATE_FORMAT;

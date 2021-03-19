@@ -1,11 +1,11 @@
 
-
-
-//module.exports.httpGet = require("./http-verb/get.template") ;
-//module.exports.httpPost = require("./http-verb/post.template") ;
-
-
-module.exports.http = function(method){
+/**
+ * Get function template by http verb
+ *  
+ * @param {"get" | "post" | "patch" | "put" | "delete" } method  
+ * @returns {NodeModule} based on the http verb
+ */
+function http(method){
     switch (method.toLowerCase()) {
         case "post":
             return require("./http-verb/post.template");
@@ -24,3 +24,18 @@ module.exports.http = function(method){
             throw Error(error);
     }
 }
+
+
+/**
+ * Get the service class template
+ * 
+ * @var {NodeModule}
+ */
+const service = require("./class/service-class.template");
+
+
+
+
+
+module.exports.http = http;
+module.exports.service = service;

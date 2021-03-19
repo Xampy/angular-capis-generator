@@ -24,7 +24,7 @@ export abstract class AbstractAPIRequest {
     protected resuestOptions: {};
 
     /**
-     * Constructor of an api request class
+     * Constructor of the api request class
      *
      *
      * @param pathEnd the resource end point
@@ -35,7 +35,7 @@ export abstract class AbstractAPIRequest {
         //Default Header
         this.requestHeaders = new HttpHeaders(
             {
-      			"Content-Type": "application/json"
+      			  "Content-Type": "application/json"
             }
         );
 
@@ -52,7 +52,7 @@ export abstract class AbstractAPIRequest {
      * @param pathEnd the resource endpoint as the the name of the resource
      */
     setResouceBasePath(pathEnd: string){
-        this.RESOURCE_BASE_PATH = environment.API_CONTEXT_PATH + ` + `§{pathEnd};` + `
+        this.RESOURCE_BASE_PATH = environment.API_CONTEXT_PATH + ` + `${pathEnd};` + `
     }
 
 

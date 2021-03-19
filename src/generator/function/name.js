@@ -40,7 +40,7 @@ function generateFunctionName(method, path_arguments){
             start = "update";
             break;
         case "patch":
-            start = "update";
+            start = "patch";
             break;
         case "delete":
             start = "delete";
