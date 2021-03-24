@@ -62,7 +62,7 @@ function parseArguments(path) {
 
     components = components.filter( function(element){ return element !== '' } );
     components.map( function(item, index){
-        //Path allows . to be in the path string
+        //Path allows . to be in the path string ex : §{arg_1}.{arg_2}
         //Symfony uses it much
         //console.log(components);
         //console.log(item);
@@ -75,6 +75,11 @@ function parseArguments(path) {
             );
         }else if ( item.includes("{") && item.includes("}") )  {
             processArgument(item, index)
+        }else {
+            //Nothing do here
+            //unless we want to process the
+            //path component to be right as it needs
+            //to be
         }
     });
 

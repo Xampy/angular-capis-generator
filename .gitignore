@@ -1,3 +1,10 @@
+#Personnal Files
+backup/
+securite-api.service.ts
+personne-api.service.ts
+request-api.class.ts
+*.ts
+
 # Logs
 logs
 *.log

@@ -1,19 +1,20 @@
 --config
-api-name "api-one" 
-output-dir src/services/api
-share-dir src/share
+api_name api
+output_dir .
+share_dir .
+context API_CONTEXT_PATH_TWO
 
 --resources
-#securite "Authentification de l'application"
-post securite /login
+#securite --description Authentification de l'application
+post --name login --url /securite/login/user
 
-#personne "Gestion des personnes physiques comme Morales"
-post --json /personne/physique
-put  /personne/physique
+#personne --description "Gestion des personnes physiques comme Morales"
+post --name default --url /personne/physique
+put  --name default --url /personne/physique
 get  --name getAllPersonne --url  /personne/physique/all
-get  --url  /personne/physique/id/{id}
-post --url  /personne/morale
-put --url  /personne/morale
-get --url  /personne/morale/all
-get --url  /personne/morale/id/{id}
-get --url  /personne/all
+get  --name default --url  /personne/physique/id/{id}
+post --name default --url  /personne/morale
+put --name default --url  /personne/morale
+get --name default --url  /personne/morale/all
+get --name default --url  /personne/morale/id/{id}
+get --name default --url  /personne/all

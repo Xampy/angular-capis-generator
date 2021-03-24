@@ -35,7 +35,16 @@ const service = require("./class/service-class.template");
 
 
 
+/**
+ * Get the request class template
+ * 
+ * @var {NodeModule}
+ */
+ const requestClass = require("./class/request-class.template");
+
+
 
 
 module.exports.http = http;
 module.exports.service = service;
+module.exports.requestClass = requestClass;

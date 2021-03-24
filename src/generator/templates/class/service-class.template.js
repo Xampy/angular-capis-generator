@@ -8,10 +8,16 @@ const { INDENT_TAB_SPACE } = require("../../../../config");
  * @param {string} resourceName the resource name as given
  * @param {string} description  the resource description
  * @param {Array<string> } functionsList genrated function list
+ * @param {string} mother_class_path the import path fo the mother class
  */
-function formatTemplate(resourceName, description, functionsList) {
+function formatTemplate(resourceName, description, functionsList, mother_class_path) {
 
     let service = serviceTemplate.replace(
+        MOTHER_REQUEST_CLASS_PATH_PATTERN, 
+        mother_class_path
+    );
+
+    service = service.replace(
         RESOURCE_NAME_PATTERN, 
         app_utils.stringToHeader(resourceName)
     );
@@ -38,7 +44,7 @@ function formatTemplate(resourceName, description, functionsList) {
 
     signatures = signatures.reduce(
         (acc, curr) => {
-            console.log("start ", curr)
+            //console.log("start ", curr)
             return acc + "\n * + " + curr;
         }
     );
@@ -71,11 +77,13 @@ const FUNCTIONS_SIGNATURE_PATTERN = "@functions_signature@";
 const RESOURCE_NAME_CAMEL_CASE_PATTERN = "'@resource_name_camel@";
 const RESOURCE_NAME_RAW = "@resource@";
 const FUNCTIONS_PATTERN = "@functions@";
+const MOTHER_REQUEST_CLASS_PATH_PATTERN = "@mother_class_path@"
 
 const serviceTemplate = `
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError } from 'rxjs/operators';
+import { AbstractAPIRequest } from '${MOTHER_REQUEST_CLASS_PATH_PATTERN}';
 
 
 /**
@@ -84,7 +92,6 @@ import { catchError } from 'rxjs/operators';
  * @description@
  * 
  * 
- * + createPersonnePhysque(data: any)
  * + ${FUNCTIONS_SIGNATURE_PATTERN}
  * 
  */
