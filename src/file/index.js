@@ -16,6 +16,7 @@ function createFile(name, dir, data){
     try{
         fs.writeFileSync(path, data);
     }catch(error){
+        console.log(error);
         return false;
     }
 

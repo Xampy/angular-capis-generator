@@ -18,6 +18,11 @@ function formatTemplate(resourceName, description, functionsList, mother_class_p
     );
 
     service = service.replace(
+        DESCRIPTION_PATTERN, 
+        description
+    );
+
+    service = service.replace(
         RESOURCE_NAME_PATTERN, 
         app_utils.stringToHeader(resourceName)
     );
@@ -77,6 +82,7 @@ const FUNCTIONS_SIGNATURE_PATTERN = "@functions_signature@";
 const RESOURCE_NAME_CAMEL_CASE_PATTERN = "'@resource_name_camel@";
 const RESOURCE_NAME_RAW = "@resource@";
 const FUNCTIONS_PATTERN = "@functions@";
+const DESCRIPTION_PATTERN = "@description@";
 const MOTHER_REQUEST_CLASS_PATH_PATTERN = "@mother_class_path@"
 
 const serviceTemplate = `
@@ -89,7 +95,7 @@ import { AbstractAPIRequest } from '${MOTHER_REQUEST_CLASS_PATH_PATTERN}';
 /**
  * API ${RESOURCE_NAME_PATTERN}
  * 
- * @description@
+ * ${DESCRIPTION_PATTERN}
  * 
  * 
  * + ${FUNCTIONS_SIGNATURE_PATTERN}
