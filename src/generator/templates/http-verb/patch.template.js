@@ -20,12 +20,12 @@ const { INDENT_TAB_SPACE } = require("../../../../config");
 
 
 const PATCH_TEMPLATE_FORMAT = 
-`%s(${httpVerb.FUNCTIONS_PARAMS_PATTERN}){
+`%s(data: any, ${httpVerb.FUNCTIONS_PARAMS_PATTERN}){
 ${INDENT_TAB_SPACE}${INDENT_TAB_SPACE}let url = this.RESOURCE_BASE_PATH + \`/%s\`;
 
 ${INDENT_TAB_SPACE}${INDENT_TAB_SPACE}//Define a type fot the patch data
 ${INDENT_TAB_SPACE}${INDENT_TAB_SPACE}//will be more preventive
-${INDENT_TAB_SPACE}${INDENT_TAB_SPACE}//let body = JSON.stringify(data);
+${INDENT_TAB_SPACE}${INDENT_TAB_SPACE}let body = JSON.stringify(data);
 
 ${INDENT_TAB_SPACE}${INDENT_TAB_SPACE}return this.httpClient.patch(
 ${INDENT_TAB_SPACE}${INDENT_TAB_SPACE}${INDENT_TAB_SPACE}url,

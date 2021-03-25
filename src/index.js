@@ -243,7 +243,8 @@ function processApiByConfig(filePath){
 
 
                                     }else {
-                                        throw Error("Http ver error: the path must start with full lowercase http verb; no space at start");
+                                        let message = `Http ver error: the path must start with full lowercase http verb; no space at start \nYour line  ${input}`;
+                                        throw Error(message);
                                     }
                                 }
                             }
