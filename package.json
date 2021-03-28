@@ -1,7 +1,7 @@
 {
   "name": "angular-capis-generator",
   "version": "1.0.0",
-  "description": "Generate api services",
+  "description": "Generate client side api services using angular http client module",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -10,7 +10,8 @@
     "angular",
     "api",
     "angular",
-    "client"
+    "client",
+    "generator"
   ],
   "author": "Xampy",
   "license": "ISC",
