@@ -1,0 +1,21 @@
+--config
+api_name api
+output_dir src/app/services/api
+share_dir src/app/shares
+context API_CONTEXT_PATH
+import_path ../../shares
+
+--resources
+#books --description "Gestion des livres"
+post --name default --url /author/all
+
+#members --description "Gestion des livres"
+get --name default --url /members/allWomen/{id}
+
+#libraries --description "Libraries management"
+get --name default --url /libraries/{type}/{name}
+get --name default --url /libraries/books/all/{type}
+post --name newBook --url /libraries/books/
+put --name updateBook --url /libraries/books/
+patch --name modifyBook --url /libraries/books/
+delete --name deleteBook --url /libraries/books/

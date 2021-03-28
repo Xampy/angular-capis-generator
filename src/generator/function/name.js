@@ -9,7 +9,7 @@ const strings_camel_case = require('../../utils/strings/camel_case');
  * based on path
  * @param {"get" | "post" | "put" | "delete" | "patch" } method http verb for the path.
  * @param {Array<string>} path the resource path.
- * @param {Array<qtring>} arguments path arguments array
+ * @param { {arguments: Array<{endpoint: string, argument: string}>, path: Array<string>} } path_arguments path arguments array
  * 
  * @returns {string}  the name of the function for the path
  * 
@@ -21,7 +21,7 @@ const strings_camel_case = require('../../utils/strings/camel_case');
  *        { endpoint: 'collections', argument: 'collection_id' },
  *        { endpoint: 'meuble', argument: 'id' }
  *     ],
- *     path: [ 'physique', 'collections', 'meuble' ]
+ *     path: [ 'collections', 'meuble' ]
  * }
  * 
  * let name = generateName(method, path, arguments)
@@ -98,9 +98,7 @@ function generateFunctionName(method, path_arguments){
     name = name.substr(0, name.length - 2);
     name = start + name;
     //console.log("function name => ",  name);
-
-
-    return name;
+    return name.replace("Resource", "");
 }
 
 

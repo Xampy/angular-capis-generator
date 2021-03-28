@@ -161,7 +161,8 @@ function processApiByConfig(filePath){
                                             //Manage the service file data
 
 
-                                            let motherClassImportPath = 'share_dir' in config ? config.share_dir:  (() => { console.log("You have not a share_dir configured"); process.exit(1)})() ;
+                                            //let motherClassImportPath = 'share_dir' in config ? config.share_dir:  (() => { console.log("You have not a share_dir configured"); process.exit(1)})() ;
+                                            let motherClassImportPath = 'import_path' in config ? config.import_path:  (() => { console.log("You have not a import_path configured"); process.exit(1)})() ;
                                             //console.log(motherClassImportPath);
                                             motherClassImportPath += `/${REQIEST_API_CLASS_FILENAME}`;
                                             //Format the template with the resource

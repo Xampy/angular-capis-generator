@@ -18,6 +18,8 @@ npm install angular-capis-generator --save-dev
 ## Usage
 To generate your api. You need to create a javascript file at the root of your project and copy and paste the code below.
 
+### We recommend you to create this file at the the root of you project otherwise you will ask to do some other configuration. You've been warned..
+
 ``` javascript
 const api_service_generator = require("angular-capis-generator");
 
@@ -40,8 +42,10 @@ To generate the services you need the api description file. Here is an example
 --config
 api_name api_test
 output_dir src/app/services/api
-share_dir src/share
+share_dir src/app/shares
 context API_CONTEXT_PATH_API_FIRST
+import_path ../../shares
+
 
 --resources
 #books --description "Book Management API resource"
@@ -101,6 +105,10 @@ You can overrited if you don't want to use the environment configuration. For th
 this.RESOURCE_BASE_PATH = [ your url ] + `/${pathEnd}`;
 ```
 And you're done.
+
+#### import_path
+It indicate where the `request-api.class.ts` will be located.
+
 ## The --resources
 This line defines the start of api resource. After this line we declare api resources with their different access url.
 
@@ -213,7 +221,7 @@ The above exemple will generate two angular services files.
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError } from 'rxjs/operators';
-import { AbstractAPIRequest } from 'src/share/request-api.class';
+import { AbstractAPIRequest } from '../../share/request-api.class';
 
 
 /**
@@ -251,7 +259,9 @@ export class MembersApiService extends  AbstractAPIRequest{
 }
 
 ```
-You can see that our functions are generated
+You can see that our functions are generated.
+
+#### You need to provide your service in the app module or your package module. By default the genrated service need to be provided in the app.module.ts
 
 After that it generates a base api request service class 
 ```Typescript
@@ -334,3 +344,13 @@ export abstract class AbstractAPIRequest {
 }
 ```
 You can mody this file as you want as add headers, pre-process before initialization and other thing that you judge necessary.
+
+## Fix Somme errors
+
+## Eperimentals decorators warning
+To fix this just set in `tsconfig.base.json` the value of `experimentalDecorators` to `false`.
+
+Another way is to provide your api service class in the app module if your injectable use root.
+
+## Environment import
+`environment not find` in the `request.class.ts`; just import it base on your project structure. 

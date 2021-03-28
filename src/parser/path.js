@@ -39,22 +39,23 @@ function parseArguments(path) {
             ////console.log( p );
 
             let subs = 1
-            let pathEndPoint = components[index - subs];
-            while( pathEndPoint.includes("{") && pathEndPoint.includes("}") ){
+            let pathEndPoint = components.length > 2 ? components[index - subs] : null; //[Handle on argument with no post resource in the path]
+            while( pathEndPoint != null && (pathEndPoint.includes("{") && pathEndPoint.includes("}"))  ){
                 //console.log("searching path ", pathEndPoint);
                 subs += 1;
                 pathEndPoint = components[index - subs];
                 //console.log("searching path ", pathEndPoint);
             }
             //console.log("pathEndPoint ", pathEndPoint);
-            if (pathEndPoint === undefined) {
+            if (pathEndPoint == null) {
                 //We have a slash before our argument
-                pathEndPoint = "/";
+                pathEndPoint = "Resource";
             }
             let data = {
                 endpoint: pathEndPoint,
                 argument: p,
             }
+            //console.log("arguments ", data);
             result.arguments = [...result.arguments, data];
         }
     }
@@ -93,7 +94,8 @@ function parseArguments(path) {
         return true;
     });
 
-    result.path = components;
+    let isAlone = result.arguments.filter((item, index)=> item.endpoint === "Resource").length ==  result.arguments.length;
+    result.path =  isAlone ? ["Resource"] : components;
     return result;    
 }
 
@@ -151,6 +153,15 @@ function formatUrlForFunction(data){
             }
         );
     });
+
+
+    //Process the url if it contains Resource
+    //means no post resource before arguments
+
+    //The url statrs with /Resource
+    if( data.path.includes("Resource")){
+        return result.slice("/Resource".length);
+    }
     return result;
 }
 
